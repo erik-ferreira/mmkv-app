@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { MMKV } from "react-native-mmkv"
+import { useEffect, useState } from "react"
+import { MMKV, useMMKVObject, useMMKV } from "react-native-mmkv"
 import { Button, Text, TextInput, View } from "react-native"
 
 import { styles } from "./styles"
@@ -9,24 +9,37 @@ interface User {
   email: string
 }
 
-const storage = new MMKV({ id: "mmkv-app" })
+// const storage = new MMKV({ id: "mmkv-app" })
 
 export default function App() {
+  const storage = useMMKV({ id: "mmkv-app" })
+
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
 
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useMMKVObject<User>("user")
 
   function handleSave() {
-    storage.set("user", JSON.stringify({ name, email }))
-
-    fetchUser()
+    setUser({ name, email })
   }
 
   function fetchUser() {
     const data = storage.getString("user")
     setUser(data ? JSON.parse(data) : null)
   }
+
+  useEffect(() => {
+    const listener = storage.addOnValueChangedListener((changedKey) => {
+      const newValue = storage.getString(changedKey)
+
+      console.log("CHAVE => ", changedKey)
+      console.log("NOVO VALOR => ", newValue)
+    })
+
+    return () => {
+      listener.remove()
+    }
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -51,3 +64,4 @@ export default function App() {
     </View>
   )
 }
+// 20:29
