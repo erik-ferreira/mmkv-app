@@ -1,4 +1,4 @@
-package com.erik_ferreira.mmkvapp;
+package com.erikferreira.mmkvapp;
 
 import android.os.Build;
 import android.os.Bundle;

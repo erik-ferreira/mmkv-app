@@ -81,9 +81,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.erik_ferreira.mmkvapp'
+    namespace 'com.erikferreira.mmkvapp'
     defaultConfig {
-        applicationId 'com.erik_ferreira.mmkvapp'
+        applicationId 'com.erikferreira.mmkvapp'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

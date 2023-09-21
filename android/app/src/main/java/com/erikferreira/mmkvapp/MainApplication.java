@@ -1,4 +1,4 @@
-package com.erik_ferreira.mmkvapp;
+package com.erikferreira.mmkvapp;
 
 import android.app.Application;
 import android.content.res.Configuration;
